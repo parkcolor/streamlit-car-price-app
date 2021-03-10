@@ -3,6 +3,8 @@ from PIL import Image
 import pandas as pd
 from PyPDF2 import PdfFileReader # pdf파일 읽어오는 라이브러리
 import os
+import h5py
+import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
