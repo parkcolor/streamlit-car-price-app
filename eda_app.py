@@ -29,6 +29,55 @@ def run_eda_app():
     elif selected_radio == '통계치':
         st.dataframe(df.describe())
 
+    choice_list = df.columns
+    choice_list = list(choice_list)
+    selected_columns = st.multiselect('컬럼을 선택하세요',choice_list)
+    if len(selected_columns) != 0 :
+        st.dataframe(df[selected_columns])
+    else:
+        st.write('선택한 컬럼이 없습니다.')
+
+    #상관계수를 화면에 보여주도록 만듭니다
+    #멀티셀렉트에 컬럼명을 보여주고,
+    #해당 컬럼들에 대한 상관계수를 보여주세요
+    #단, 컬럼들은 숫자 컬럼들만 멀티셀렉트에 나타나야 합니다
+    
+    corr_columns = df.columns[df.dtypes != object]
+    selected_corr = st.multiselect('상관계수 컬럼 선택',corr_columns)
+    
+    if len(selected_corr) != 0 :
+        st.dataframe(df[selected_corr].corr())
+        
+        fig = sns.pairplot(data = df[selected_corr])
+        st.pyplot(fig)
+
+    else:
+        st.write('선택한 컬럼이 없습니다.')
+
+    #컬럼 하나를 선택하면, 해당 컬럼의 min과 max에 해당하는 사람의 데이터를 보여줘라
+    selected_col2 = st.selectbox('컬럼을 선택하세요',corr_columns)
+    if selected_col2 is not None:
+        st.write('최대')    
+        st.dataframe(df.loc[df[selected_col2] == df[selected_col2].max(),])
+        st.write('최소')    
+        st.dataframe(df.loc[df[selected_col2] == df[selected_col2].min(),])
+
+    #고객이름을 검색할 수 있는 기능을 개발
+    word = st.text_input('이름을 입력하세요')
+
+    result = df.loc[df['Customer Name'].str.contains(word, case = False),]
+
+    st.dataframe(result)
+
+
+    
+
+    # search = st.text_input('이름을 입력하세요')
+    # st.dataframe(df.loc[df['Customer Name'],])
+
+    
+
+
     
 
 
