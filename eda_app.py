@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 import pandas as pd
-from PyPDF2 import PdfFileReader # pdf파일 읽어오는 라이브러리
+ # pdf파일 읽어오는 라이브러리
 import os
 import h5py
 import pickle
@@ -12,8 +12,8 @@ matplotlib.use('Agg') #서버에서 화면에 표시하기 위해서 필요
 import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow.keras
-from keras.models import Sequential
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 
